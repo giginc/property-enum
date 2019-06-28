@@ -13,6 +13,11 @@ class AutoSetComponent extends Component
     public function startup()
     {
         $controller = $this->_registry->getController();
+
+        if (!class_exists('App\Model\Table\\' . $controller->modelClass) . 'Table') {
+            return;
+        }
+
         $table = $controller->loadModel();
         $tableAlias = $table->table();
         if (empty($table->enums)) {
